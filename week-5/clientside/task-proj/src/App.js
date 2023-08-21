@@ -101,46 +101,51 @@ function App() {
     }
   };
   return (
-    <div className="d-flex justify-content-center align-items-center flex-column">
-      <h2>Task List</h2>
-      <Table striped bordered hover className="mt-3">
-        <thead>
-          <tr>
-            <th>ID</th>
+    <div className="flex  ">
+      <div className='mx-10 my-10'>
+      <h2 className='text-xl font-bold'>Task List</h2>
+      <div className="mt-3 flex flex-col justify-center">
+        <div className='flex space-x-24 mx-10'>
+            <th className=''>ID</th>
             <th>Title</th>
             <th>Status</th>
             <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
+        </div>
+        <div>
           {tasks.map(task => (
-            <tr key={task.id}>
-              <td>{task.id}</td>
-              <td>{task.name}</td>
-              <td>{task.status}</td>
-              <td>
-                <Button variant="primary" onClick={() => handleEdit(task)}>Edit</Button>{' '}
-                <Button variant="danger" onClick={() => handleDelete(task.id)}>Delete</Button>
-              </td>
-            </tr>
+            <div className='flex space-x-18' key={task.id}>
+              <div className='flex space-x-20 my-2 mx-10'>
+              <div>{task.id}</div>
+              <div>{task.name}</div>
+              <div>{task.status}</div>
+              </div>
+              
+              <div className='ml-auto my-1 mx-10'>
+                <Button className='bg-gray-300 hover:bg-gray-500 rounded-sm px-4 py-2' variant="primary" onClick={() => handleEdit(task)}>Edit</Button>{' '}
+                <Button className='bg-red-300 hover:bg-red-500 rounded-sm px-4 py-2' variant="danger" onClick={() => handleDelete(task.id)}>Delete</Button>
+              </div>
+            </div>
           ))}
-        </tbody>
-      </Table>
-
-      <Button variant="success" onClick={handleCreate}>Create Task</Button>
+        </div>
+      </div>
+      </div>
+      <div className='my-20'>
+      <Button className='bg-green-300 hover:bg-green-400 rounded-sm px-4 py-2' variant="success" onClick={handleCreate}>Create Task</Button>
 
       <Modal show={showModal} onHide={handleCloseModal} centered>
        
         <Modal.Body>
-  <table className="table">
+  <div className="table ml-20 bg-slate-200 p-10">
     <tbody>
+     
+    
       <tr>
-        <td>
+        <div>
           <Form.Group controlId="title">
-            <td>
+            <div>
             <Form.Label>Title</Form.Label>
-            </td>
-            <td>
+            </div>
+            <div>
             <Form.Control
               type="text"
               placeholder="Enter title"
@@ -153,19 +158,20 @@ function App() {
                 }
               }}
             />
-            </td>
+            
+            </div>
             
           </Form.Group>
-        </td>
+        </div>
         
       </tr>
       <tr>
       <td>
           <Form.Group controlId="description">
-            <td>
+            <div>
             <Form.Label>Status</Form.Label>
-            </td>
-            <td>
+            </div>
+            <div>
             <Form.Control
               type="text"
               placeholder="Enter status"
@@ -179,19 +185,23 @@ function App() {
               }}
             />
           
-            </td>
+            </div>
+            <div className='flex justify-between mt-5'>
+      <Button className='bg-red-300 hover:bg-red-400 rounded-sm px-2 py-1' variant="secondary" onClick={handleCloseModal}>Close</Button>
+    <Button className='bg-green-300 hover:bg-green-400 rounded-sm px-2 py-1' variant="primary" onClick={handleSaveTask}>Save</Button>
+      </div>
           </Form.Group>
         </td>
       </tr>
     </tbody>
-  </table>
+  </div>
 </Modal.Body>
       
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
-          <Button variant="primary" onClick={handleSaveTask}>Save</Button>
+         
         </Modal.Footer>
       </Modal>
+      </div>
     </div>
   );
 }
